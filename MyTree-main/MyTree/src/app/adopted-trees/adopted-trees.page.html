@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Adopted Trees</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  padding class="background">
+  <div class="ion-padding">
+    <h2 style="background-color:#C0E1D1;">The following trees are already adopted and taken care of:</h2>
+    <ion-card *ngFor="let item of (items | async | adoptedFilter)" style="display: inline-block;">
+    
+      <img src={{item.Picture}} width="200" height="200">
+      <ion-card-header>
+        <ion-card-title>{{item.Name | json}}</ion-card-title>
+        <ion-card-subtitle>{{item.Type | json}}</ion-card-subtitle>
+      </ion-card-header>
+  
+      <ion-card-content>
+        Address: {{item.Address | json}}
+        <br><br>
+        <button type="button" class="cbutton button1">Read Story</button>
+        <button type="button" class="cbutton button1" (click)="func(item.GPS.Latitude, item.GPS.Longitude)">Show on map</button>
+      </ion-card-content>
+  </ion-card>
+    <style>
+      ion-card {
+                background-color: #E0ECE6;
+                text-align: center;
+                font-size: large;
+                border: 5px solid #C0E1D1;
+                counter-reset: rowNumber;
+                display:grid;
+                position:static;
+            }
+      
+      .cbutton {
+    border: none;
+    background-color: rgb(143, 199, 176);
+    border: 1px solid #C0E1D1;
+    color: rgb(238, 243, 237);
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 10px 20px;
+    cursor: pointer;
+    float: right;
+  }
+    </style>
+  </div>
+</ion-content>

@@ -1,0 +1,57 @@
+//#include "FirebaseESP8266.h"
+#include <ESP8266WiFi.h>
+#include "DHT.h"
+
+
+
+#define DHT11_PIN 14
+#define DHTTYPE DHT11
+
+DHT dht(DHT11_PIN,DHTTYPE);
+
+float temp;
+float umid;
+
+#define WIFI_SSID "Redmi"
+#define WIFI_PASSWORD "12345678"
+
+void setup(){
+  Serial.begin(115200);
+  WiFi.begin(WIFI_SSID,WIFI_PASSWORD);
+  Serial.print("Connecting to Wi-Fi");
+  while(WiFi.status()!=WL_CONNECTED)
+  {
+    Serial.print(".");
+    delay(300);
+  }
+  
+  Serial.print("Connected with IP: ");
+  Serial.println(WiFi.localIP());
+  dht.begin();
+}
+void loop(){
+
+umid=dht.readHumidity();
+temp=dht.readTemperature();
+
+Serial.println(temp);
+Serial.println(umid);
+
+Serial.println(analogRead(A0));
+  delay(5000);
+("Message: %.2f \n", temp);
+("Message: %.2f \n", umid);
+  
+  //int chk = dht.read11(DHT11_PIN);
+  //Serial.print("Temperature = ");
+  //Serial.println(DHT.temperature);
+  //Serial.print("Humidity = ");
+  //Serial.println(DHT.humidity);
+  delay(3000);
+}
+
+Ce am gasit despre umiditate:
+https://www.youtube.com/watch?v=nUHizmtyt74    --> la 1.50 ar putea fi util codul, nu a explicat niciunde ce inseamna valorile
+
+Am mai gasit o alta varianta de cod care returneaza umiditatea in procente:
+https://www.youtube.com/watch?v=OogldLc9uYc

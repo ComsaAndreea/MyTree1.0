@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tree Status</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card style="">
+    
+    <ion-card-content>
+      <ion-card-title style="font-size:xx-large;">
+        How's my tree doing?
+      </ion-card-title>
+      <div style="font-size:x-large;">
+        Air Temperature:
+        {{(sensorData | async)?.Temperature}}
+        °C
+      </div>
+      <div style="font-size:x-large;">
+        Air Humidity:
+        {{(sensorData | async)?.Air_Humidity}}
+        %
+      </div>
+      <div style="font-size:x-large;">
+        Soil Humidity:
+        {{(sensorData | async)?.Soil_Moisture}}
+        <br />
+        <p style="font-size:large;">High Soil Humidity value (>500) indicates your tree needs water!</p>
+        
+      </div>
+
+      <div *ngIf="sensorData | async as sD">
+
+        <!--<div *ngIf="sD.Temperature > 10 && sD.Temperature < 30 && sD.Air_Humidity > 30 && sD.Air_Humidity < 70 &&  sD.Soil_Moisture > 600">-->
+        <div *ngIf="sD.Soil_Moisture < 500">
+          <img src="../../assets/img/Smiley.jpg" style="height:50vh; width:50vh;"/>
+        </div>
+
+        <!--<div *ngIf="sD.Temperature < 10 || sD.Temperature > 30 || sD.Air_Humidity < 30 || sD.Air_Humidity > 70 &&  sD.Soil_Moisture > 600">-->
+        <div *ngIf="sD.Soil_Moisture > 500">
+          <img src="../../assets/img/Sad.jpg" style="height:50vh; width:50vh;" />
+        </div>
+
+
+      </div>
+
+      <!--<ion-list>
+    <ion-item class="text" *ngFor="let item of items | async">
+    </ion-item>
+  </ion-list>-->
+      <!--<div *ngIf="items | async as item">
+   merge
+    <div *ngIf=" item.Temperature > 20">
+      merge
+    </div>
+  </div>-->
+
+    </ion-card-content> 
+</ion-card>
+<style>
+  ion-card {
+            background-color: #51faa5;
+            text-align: center;
+            font-size: large;
+            border: 6px solid #204209;
+            counter-reset: rowNumber;
+            display:grid;
+            position:static;
+        }
+</style>
+  
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "MyTree",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

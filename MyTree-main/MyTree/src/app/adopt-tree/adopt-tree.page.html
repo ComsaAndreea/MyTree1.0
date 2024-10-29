@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Adopt a tree!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="background" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Adopt a tree</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <h2 style="background-color: #E0ECE6;">Please choose the trees you want to adopt!</h2>
+  <ion-card *ngFor="let item of (items | async | treeFilter)" style="display: inline-block;">
+    
+    <img src={{item.Picture}} width="200" height="200">
+    <ion-card-header>
+      <ion-card-title>{{item.Name | json}}</ion-card-title>
+      <ion-card-subtitle>{{item.Type | json}}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      Address: {{item.Address | json}}
+      <br><br>
+      <button type="button" class="cbutton button1" (click)="presentAlert(item.Name)">Adopt</button>
+      <button type="button" class="cbutton button1" (click)="func(item.GPS.Latitude, item.GPS.Longitude)">Show on map</button>
+    </ion-card-content>
+</ion-card>
+
+<script>
+  function funct(){
+    alert('this is an alert');
+  }
+</script>
+  <style>
+    ion-card {
+              background-color: #E0ECE6;
+              text-align: center;
+              font-size: large;
+              border: 3px solid #688F4E;
+              counter-reset: rowNumber;
+              display:grid;
+              position:static;
+          }
+    
+    .cbutton {
+  border: none;
+  background-color: rgb(151, 248, 208);
+  border: 1px solid #688F4E;
+  color: rgb(18, 116, 9);
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 10px 20px;
+  cursor: pointer;
+  float: right;
+}
+p{
+      font-size: large;
+      color: rgb(4, 56, 4);
+      margin: 10px;
+    }
+    img {
+      margin: 10px;
+    }
+  </style>
+</ion-content>
+
+
+
+
+
+
+
+
